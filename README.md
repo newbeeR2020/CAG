@@ -6,6 +6,12 @@ Cache-Augmented Generation
 pip install -r ./requirements.txt
 ```
 
+## Preparation
+- create a .env file and input all keys need
+```bash
+cp ./.env.template ./.env
+```
+
 ## Parameter Usage -- kvcache.py
 - `--kvcache`: "file"
 - `--dataset`: "hotpotqa-train" or "squad-train"
