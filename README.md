@@ -7,10 +7,14 @@ pip install -r ./requirements.txt
 ```
 
 ## Preparation
-- create a .env file and input all keys need
+- create a .env file and input the keys required
 ```bash
 cp ./.env.template ./.env
 ```
+
+## Usage
+- `rag.py` is for RAG Experiment
+- `kvcache.py` is for CAG Experiment
 
 ## Parameter Usage -- kvcache.py
 - `--kvcache`: "file"
