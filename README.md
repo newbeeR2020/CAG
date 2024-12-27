@@ -71,7 +71,7 @@ python ./rag.py --index "bm25" --dataset "hotpotqa-train" --similarity bertscore
 #### `--maxKnowledge` parameter notice: 
 > [!NOTE]
 > Approximate Tokens count corresponding to knowledge document size of "squad-train" and "hotpotqa-train" dataset. 
-> 
+
 > datasets=("squad-train")
 > - when k = 3, tokens = 21,000
 > - when k = 4, tokens = 32,000
@@ -90,8 +90,8 @@ python ./rag.py --index "bm25" --dataset "hotpotqa-train" --similarity bertscore
 #### `--maxQuestion` parameter notice:
 > - when using "squad-train" dataset, 1 knowledge has average 150 questions
 > - when using "hotpotqa-train" dataset, 1 knowledge has 1 question
-> 
-> [!NOTE]
+
+> [!TIP]
 > Since 1 document in "hotpoqa-train" dataset has only 1 question, it may not satisfy large-scale evaluation.
 > Multiple evaluation could be a relatively better approach.
 > 
