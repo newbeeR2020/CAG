@@ -8,12 +8,12 @@ pip install -r ./requirements.txt
 
 ## Preparation
 > [!IMPORTANT]  
-> if zip files not in `./datasets/squad/` and `./datasets/hotpotqa/` folder.
->   download the required squad and hotpotqa datasets by curl script
+> if zip files not in `./datasets/squad/` and `./datasets/hotpotqa/` folder,
+> download the required `squad` and `hotpotqa` datasets by curl script
 > ```bash
 > sh ./downloads.sh
 > ```
-> unzip the dataset zip file in datasets directory
+> **unzip the dataset zip file** in datasets directory
 
 > [!TIP] 
 > make sure the `train-v1.1.json` in `./datasets/squad` and `hotpot_train_v1.1.json` in `./datasets/hotpotqa`
