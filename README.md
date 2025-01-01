@@ -1,5 +1,26 @@
-# CAG
-Cache-Augmented Generation
+# Cache-Augmented Generation (CAG)
+
+Retrieval-Augmented Generation (RAG) has emerged as a powerful approach for enhancing language models by integrating external knowledge sources. However, RAG also introduces several challenges, including:  
+- **Retrieval Latency** – Delays caused by real-time retrieval steps.  
+- **Retrieval Errors** – Inaccuracies in selecting relevant documents.  
+- **System Complexity** – Increased architectural and maintenance overhead.  
+
+To address these limitations, we propose **Cache-Augmented Generation (CAG)**—an alternative paradigm that bypasses real-time retrieval. CAG leverages the extended context windows of modern large language models (LLMs) by preloading all relevant resources into the model’s context and caching its runtime parameters. During inference, the preloaded KV-cache enables the model to generate responses directly, eliminating the need for retrieval.  
+
+**Advantages of CAG**  
+- **Reduced Latency** – Eliminates real-time retrieval, enabling faster inference.  
+- **Improved Reliability** – Minimizes retrieval errors while maintaining context relevance.  
+- **Simplified Design** – Provides a streamlined, retrieval-free alternative to RAG, achieving comparable or superior results with lower complexity.  
+
+**Limitations of CAG**  
+- **Limited Knowledge Size** – CAG requires the entire knowledge source to fit within the context window, making it less suitable for tasks involving extremely large datasets.  
+- **Context Length Constraints** – The performance of LLMs may degrade with very long contexts ([reference](https://arxiv.org/pdf/2404.02060v2)).  
+
+Our [paper](https://arxiv.org/abs/2412.15605) investigates the relationship between model performance and context length, providing insights into scenarios where CAG excels.  
+
+The limitations of CAG are rapidly being addressed by advancements in LLMs with longer context windows and improved capabilities for extracting relevant information from extended inputs. As these models continue to evolve, **CAG** is expected to handle increasingly complex applications, making it a practical and scalable alternative to traditional RAG.  
+
+---
 
 ## Installation 
 ```bash
@@ -95,5 +116,18 @@ python ./rag.py --index "bm25" --dataset "hotpotqa-train" --similarity bertscore
 > Since 1 document in "hotpoqa-train" dataset has only 1 question, it may not satisfy large-scale evaluation.
 > Multiple evaluation could be a relatively better approach.
 > 
+
+# Citation
+```
+@misc{chan2024dontragcacheaugmentedgeneration,
+      title={Don't Do RAG: When Cache-Augmented Generation is All You Need for Knowledge Tasks}, 
+      author={Brian J Chan and Chao-Ting Chen and Jui-Hung Cheng and Hen-Hsen Huang},
+      year={2024},
+      eprint={2412.15605},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.15605}, 
+}
+```
 
 
