@@ -117,7 +117,7 @@ python ./rag.py --index "bm25" --dataset "hotpotqa-train" --similarity bertscore
 > Multiple evaluation could be a relatively better approach.
 > 
 
-# Citation
+## Citation
 ```
 @misc{chan2024dontragcacheaugmentedgeneration,
       title={Don't Do RAG: When Cache-Augmented Generation is All You Need for Knowledge Tasks}, 
