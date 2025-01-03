@@ -2,3 +2,12 @@
 .venv/
 .pycache/
 .ipynb_checkpoints
+# MacOS関連
+.DS_Store
+
+# 環境ディレクトリ
+myenv/
+newenv/
+
+# その他のキャッシュや結果
+results/

@@ -456,8 +456,9 @@ def load_quantized_model(model_name, hf_token=None):
         quantization_config=bnb_config,
         device_map="auto",          # Automatically choose best device
         trust_remote_code=True,     # Required for some models
-        token=hf_token
+        token=hf_token 
     )
+    model = model.disk_offload(offload_folder="./offload")
     
     return tokenizer, model
 
@@ -466,7 +467,7 @@ if __name__ == "__main__":
     # parser.add_argument('--method', choices=['rag', 'kvcache'], required=True, help='Method to use (rag or kvcache)')
     # parser.add_argument('--kvcache', choices=['file', 'variable'], required=True, help='Method to use (from_file or from_var)')
     parser.add_argument('--modelname', required=False, default="meta-llama/Llama-3.2-1B-Instruct", type=str, help='Model name to use')
-    parser.add_argument('--quantized', required=False, default=False, type=bool, help='Quantized model')
+    parser.add_argument('--quantized', action='store_true', help='Use quantized model')
     parser.add_argument('--kvcache', choices=['file'], required=True, help='Method to use (from_file or from_var)')
     parser.add_argument('--similarity', choices=['bertscore'], required=True, help='Similarity metric to use (bertscore)')
     parser.add_argument('--output', required=True, type=str, help='Output file to save the results')
@@ -483,10 +484,10 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    print("maxKnowledge", args.maxKnowledge, "maxParagraph", args.maxParagraph, "maxQuestion", args.maxQuestion, "randomeSeed", args.randomSeed)
+    print("maxKnowledge", args.maxKnowledge, "maxParagraph", args.maxParagraph, "maxQuestion", args.maxQuestion, "randomSeed", args.randomSeed)
     
     model_name = args.modelname
-    rand_seed = args.randomSeed if args.randomSeed != None else None
+    rand_seed = args.randomSeed if args.randomSeed is not None else None
     
     if args.quantized:
         tokenizer, model = load_quantized_model(model_name=model_name, hf_token=HF_TOKEN)
@@ -495,14 +496,15 @@ if __name__ == "__main__":
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype=torch.float16,
-            device_map="auto",
+            device_map={"": "cpu"},
+            trust_remote_code=True,
             token=HF_TOKEN
         )
     
     def unique_path(path, i=0):
         if os.path.exists(path):
             # path = path.split("_")[:-1] if i != 0 else path
-            return unique_path(path + "_" + str(i), i + 1)
+            return unique_path(f"{path}_{i}", i + 1)
         return path
     
     if os.path.exists(args.output):
